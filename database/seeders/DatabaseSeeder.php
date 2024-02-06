@@ -14,12 +14,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         \App\Models\User::factory(10)->create();
-
+        Listing::factory(6)->create();
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        Listing::create([
+       /* Listing::create([
             'title' => 'Laravel Senior Development',
             'tags' => 'laravel, javascript',
             'company' => 'Acme Corp',
@@ -33,10 +33,10 @@ class DatabaseSeeder extends Seeder
             'title' => 'Full-stack Developer',
             'tags' => 'laravel, javascript',
             'company' => 'Acme Corp',
-            'location' => 'Milan, MA',
+            'location' => 'Boston, MA',
             'email' => 'email1@email.com',
             'website' => 'https://www.acme.com',
             'description' => 'description'
-        ]);
+        ]);*/
     }
 }

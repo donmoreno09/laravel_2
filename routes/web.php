@@ -36,11 +36,17 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('singleListing/{id}', function($id) {
+/*Route::get('singleListing/{id}', function($id) {
     return view('singleListing', [
         'listings' => Listing::find($id)
     ]);
 
+});*/
+
+Route::get('singleListing/{listing}', function(Listing $listing){
+    return view('singleListing', [
+        'listings' => $listing
+    ]);
 });
 
 Route::get('hello', function () {
