@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ListingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Listing;
@@ -19,11 +20,10 @@ use App\Models\Listing;
     return view('welcome');
 }); */ 
 
-Route::get('/', function () {
-    return view('listings', [
-        'heading' => 'List of Listings',
+Route::get('/', [ListingController::class, 'index']);//function () {
+    /*return view('listings', [
         'listings' => Listing::all() /*[
-            /*[
+            [
                 'id' => '1',
                 'title' => 'Listing One',
                 'description' => 'WAZZZZZZZZZZZZZZZZUP'
@@ -32,9 +32,9 @@ Route::get('/', function () {
                 'id' => '2',
                 'title' => 'Listing Two',
                 'description' => 'WAZZZZZZZZZZZZZZZZUUUUUUUUUUUUUUUUUUUUUUUUUP'
-            ]*/
-    ]);
-});
+            ]
+    ]);*/
+//});
 
 /*Route::get('singleListing/{id}', function($id) {
     return view('singleListing', [
@@ -43,11 +43,11 @@ Route::get('/', function () {
 
 });*/
 
-Route::get('singleListing/{listing}', function(Listing $listing){
-    return view('singleListing', [
+Route::get('singleListing/{listing}', [ListingController::class,  'show']);//We just moved the functionality in a controller. So before ->//function(Listing $listing){
+    /*return view('singleListing', [
         'listings' => $listing
-    ]);
-});
+    ]);*/ // I made a controller for the home page and singleListing
+//});
 
 Route::get('hello', function () {
     return response('<h1>Hello World</h1>');
