@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ListingController;
+use App\Models\Listing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Listing;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ListingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,7 @@ use App\Models\Listing;
 /* Route::get('/', function () {
     return view('welcome');
 }); */ 
-
+//ALL LISTING
 Route::get('/', [ListingController::class, 'index']);//function () {
     /*return view('listings', [
         'listings' => Listing::all() /*[
@@ -42,16 +43,50 @@ Route::get('/', [ListingController::class, 'index']);//function () {
     ]);
 
 });*/
-
+//SINGLE LISTING
 Route::get('singleListing/{listing}', [ListingController::class,  'show']);//We just moved the functionality in a controller. So before ->//function(Listing $listing){
     /*return view('singleListing', [
         'listings' => $listing
     ]);*/ // I made a controller for the home page and singleListing
 //});
+//Create Form
+Route::get('/listings/create', [ListingController::class,  'create'])->middleware('auth');
+
+//Store listing Data
+Route::post('/listings', [ListingController::class,  'store'])->middleware('auth');
+
+//SHOW EDIT FORM
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->middleware('auth');
 
 Route::get('hello', function () {
     return response('<h1>Hello World</h1>');
 });
+
+//Update Listing
+Route::put('/listings/{listing}', [ListingController::class, 'update'])->middleware('auth');
+
+//Delete Listing
+Route::delete('/listings/{listing}', [ListingController::class, 'destroy'])->middleware('auth');
+
+//Show Registration Form
+Route::get('/register', [UserController::class, 'create'])->middleware('guest');
+
+//Create New User
+Route::post('/users', [UserController::class, 'store']);
+
+//Log User Out
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+
+//Show Login Form
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
+
+//Login User
+Route::post('/users/authenticate', [UserController::class, 'authenticate']);
+
+//Manage Listings
+Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
+
+
 
 Route::get('posts/{id}', function($id){
     return response('Posts ' . $id); //response is a helper method
